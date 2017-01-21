@@ -1,0 +1,44 @@
+{% extends "blogs/__base__.html" %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block beforehead %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <h2 class="text-center">{{ blog.name }}</h2>
+            <br/>
+            <p class="detail-info-box text-center">
+                <span>发布时间： {{ blog.created_at | date:"Y-m-d" }}</span>
+                <span>编辑：<a href="mailto:{{ blog.user_id.email }}">{{ blog.user_id.last_name }}{{ blog.user_id.first_name }}</a></span>
+                <span>阅读数：{{ blog.hit_count.hits  }}</span>
+            </p>
+            <div class="panel-body">
+                {{ blog.content | safe }}
+                <br/>
+                <div class="tag-box">
+                    <ul class="list-inline">
+                        <li><span class="glyphicon glyphicon-tags"></span></li>
+                        {% for tag in blog.tags.all %}
+                        <li><a class="tag" href="#"><span>{{ tag.name }}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if next %}<a href="../{{ next.id }}">下一篇：{{ next.name }}</a>{% endif %}
+                <br/>{% if prev %}<a href="../{{ prev.id }}">上一篇：{{ prev.name }}</a>{% endif %}
+                <div class="ds-thread" data-thread-key="{{ blog.id }}" data-title="{{ blog.name }}" data-url="" data-limit="5"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block afterbody %}
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'pager-commons' %}
+{% render_bundle 'blog' %}
+{% endblock %}

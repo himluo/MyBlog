@@ -1,0 +1,52 @@
+{% extends "blogs/__base__.html" %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block beforehead %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div id = "vm" class="panel">
+            <!-- {% verbatim %} {{ blogs }} {% endverbatim %} -->
+            <div v-for="blog in blogs" :key="blog.id" class="panel-body">
+                <!--/stories-->
+                <div class="row">
+                    <br>
+                    <div class="col-md-2 col-sm-3 text-center">
+                <a class="story-img" href="#"><img :src="blog.image || '/media/upload/2016/12/15/16336222241285383.jpg'" onerror="this.src='/media/upload/2016/12/15/16336222241285383.jpg'" style="width:150px" class="img-thumbnail"></a>
+            </div>
+                    <div class="col-md-10 col-sm-9">
+                        <h3>{% verbatim %} {{ blog.name }} {% endverbatim %}</h3>
+                        <br/>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p>{% verbatim %} {{ blog.summary }} {% endverbatim %}</p>
+                                <p class="text-right"><a class="btn btn-twitter btn-sm" :href="blog.id | prefix('blog/')">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
+                                <ul class="list-inline text-right">
+                                    <li v-for="tag in blog.tags"><a class="tag" href="#"><span class="label label-info">{% verbatim %}{{ tag.name }}{% endverbatim %}</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <ul class="list-inline panel-footer">
+                        <li><a href="#"><i class="glyphicon glyphicon-time"></i>{% verbatim %} {{ blog.created_at | moment('YYYY-MM-DD') }} {% endverbatim %}</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span class="ds-thread-count" :data-thread-key="blog.id" data-count-type="comments"></span> )</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 阅读({% verbatim %} {{ blog.hits || 0 }} {% endverbatim %})</a></li>
+                    </ul>
+                </div>
+            </div>
+            <pager :total-page="totalPage" @go-page="goPage"></pager>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block afterbody %}
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'pager-commons' %}
+{% render_bundle 'blogs' %}
+{% endblock %}
