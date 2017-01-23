@@ -23,7 +23,7 @@ class Blog(models.Model, HitCountMixin):
     summary = models.CharField(max_length=200)
     content = RichTextField()
     created_at = models.DateTimeField(default=timezone.now)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, null=True)
     hit_count_generic = GenericRelation(
         HitCount, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')
