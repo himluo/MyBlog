@@ -30,7 +30,15 @@
                 </div>
                 {% if next %}<a href="../{{ next.id }}">下一篇：{{ next.name }}</a>{% endif %}
                 <br/>{% if prev %}<a href="../{{ prev.id }}">上一篇：{{ prev.name }}</a>{% endif %}
-                <div class="ds-thread" data-thread-key="{{ blog.id }}" data-title="{{ blog.name }}" data-url="" data-limit="5"></div>
+                <!--PC版-->
+                <div id="SOHUCS" sid="{{ blog.id }}"></div>
+                <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+                <script type="text/javascript">
+                    window.changyan.api.config({
+                        appid: 'cysK87A3s',
+                        conf: 'prod_3c488251f8d08f575b61b1691f4edef6'
+                    });
+                </script>
             </div>
         </div>
     </div>
