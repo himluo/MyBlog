@@ -3,9 +3,7 @@
 {% block title %}My amazing blog{% endblock %}
 
 {% block beforehead %}
-{% load render_bundle from webpack_loader %}
-{% render_bundle 'pager-commons' %}
-{% render_bundle 'blogs' %}
+
 {% endblock %}
 
 {% block content %}
@@ -48,6 +46,9 @@
         </div>
     </div>
 </div>
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'pager-commons' %}
+{% render_bundle 'blogs' %}
 {% endblock %}
 
 {% block afterbody %}
