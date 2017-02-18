@@ -15,7 +15,7 @@
                     <br>
                     <div class="col-md-2 col-sm-3 text-center">
                 <a class="story-img" href="#"><img :src="blog.image || '/media/upload/2016/12/15/16336222241285383.jpg'" onerror="this.src='/media/upload/2016/12/15/16336222241285383.jpg'" style="width:150px" class="img-thumbnail"></a>
-            </div>
+                </div>
                     <div class="col-md-10 col-sm-9">
                         <h3>{% verbatim %} {{ blog.name }} {% endverbatim %}</h3>
                         <br/>
@@ -34,8 +34,9 @@
                 <div class="row">
                     <ul class="list-inline panel-footer">
                         <li><a href="#"><i class="glyphicon glyphicon-time"></i>{% verbatim %} {{ blog.created_at | moment('YYYY-MM-DD') }} {% endverbatim %}</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span class="ds-thread-count" :data-thread-key="blog.id" data-count-type="comments"></span> )</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span id="sourceId::${5207613a-5d2f-4c20-85da-25546763c7e0}" class="cy_cmt_count"></span> )</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 阅读({% verbatim %} {{ blog.hits || 0 }} {% endverbatim %})</a></li>
+                        <script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=${cysK87A3s}"></script>
                     </ul>
                 </div>
             </div>
