@@ -2,7 +2,11 @@
 
 {% block title %}My amazing blog{% endblock %}
 
-{% block beforehead %}{% endblock %}
+{% block beforehead %}
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'pager-commons' %}
+{% render_bundle 'blogs' %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -14,7 +18,7 @@
                 <div class="row">
                     <br>
                     <div class="col-md-2 col-sm-3 text-center">
-                <a class="story-img" href="#"><img :src="blog.image || '/media/upload/2016/12/15/16336222241285383.jpg'" onerror="this.src='/media/upload/2016/12/15/16336222241285383.jpg'" style="width:150px" class="img-thumbnail"></a>
+                <a class="story-img" href="#"><img :src="blog.image"  style="width:150px" class="img-thumbnail"></a>
                 </div>
                     <div class="col-md-10 col-sm-9">
                         <h3>{% verbatim %} {{ blog.name }} {% endverbatim %}</h3>
@@ -47,7 +51,4 @@
 {% endblock %}
 
 {% block afterbody %}
-{% load render_bundle from webpack_loader %}
-{% render_bundle 'pager-commons' %}
-{% render_bundle 'blogs' %}
 {% endblock %}

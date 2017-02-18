@@ -61,5 +61,8 @@ function initVM(results) {
     });
 }
 
-getBlogPage(1, initVM);
+$(function () {
+    getBlogPage(1, initVM);
+});
+
 
