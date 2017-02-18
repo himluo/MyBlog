@@ -38,7 +38,7 @@
                 <div class="row">
                     <ul class="list-inline panel-footer">
                         <li><a href="#"><i class="glyphicon glyphicon-time"></i>{% verbatim %} {{ blog.created_at | moment('YYYY-MM-DD') }} {% endverbatim %}</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span id="sourceId::b24239d2-9af2-454e-8082-649e6c60a55e" class="cy_cmt_count"></span> )</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span :id="blog.id | prefix('sourceId::')" class="cy_cmt_count"></span> )</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 阅读({% verbatim %} {{ blog.hits || 0 }} {% endverbatim %})</a></li>
                         <script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysK87A3s"></script>
                     </ul>
