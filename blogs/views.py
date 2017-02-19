@@ -6,13 +6,39 @@ from rest_framework import permissions
 import hitcount
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def blogs(request, page=1):
-    blogs = Blog.objects.all()
+def blogs(request):
+    blogs_list = Blog.objects.all()
+    paginator = Paginator(blogs_list, 5)
+
+    page = request.GET.get('page')
+    try:
+        blogs = paginator.page(page)
+    except PageNotAnInteger:
+        blogs = paginator.page(1)
+        page = 1
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)
+
+    page_view = 2
+    pages_list = [x for x in range(int(page)-page_view, int(page)+page_view+1) if x >= 1 and x <= paginator.num_pages]
+    if pages_list[0] != 1:
+        pages_list.insert(0, 1)
+
+    if pages_list[1] >= 3:
+        pages_list.insert(1, '...')
+
+    if pages_list[-1] != paginator.num_pages:
+        pages_list.append(paginator.num_pages)
+
+    if pages_list[-2] < paginator.num_pages - 1:
+        pages_list.insert(-1, '...')
+
     return render(request, 'blogs/blogs.html', {
-        blogs: blogs,
-        page: page,
+        'blogs': blogs,
+        'pages': pages_list
     })
 
 

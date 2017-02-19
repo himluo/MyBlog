@@ -10,23 +10,25 @@
 <div class="row">
     <div class="col-md-9">
         <div id = "vm" class="panel">
-            <!-- {% verbatim %} {{ blogs }} {% endverbatim %} -->
-            <div v-for="blog in blogs" :key="blog.id" class="panel-body">
+            {% for blog in blogs %}
+            <div class="panel-body">
                 <!--/stories-->
                 <div class="row">
                     <br>
                     <div class="col-md-2 col-sm-3 text-center">
-                <a class="story-img" href="#"><img :src="blog.image"  style="width:150px" class="img-thumbnail"></a>
-                </div>
+                        <a class="story-img" href="#"><img src="../media/{{ blog.image }}"  style="width:150px" class="img-thumbnail"></a>
+                    </div>
                     <div class="col-md-10 col-sm-9">
-                        <h3>{% verbatim %} {{ blog.name }} {% endverbatim %}</h3>
+                        <h3>{{ blog.name }}</h3>
                         <br/>
                         <div class="row">
                             <div class="col-xs-12">
-                                <p>{% verbatim %} {{ blog.summary }} {% endverbatim %}</p>
-                                <p class="text-right"><a class="btn btn-twitter btn-sm" :href="blog.id | prefix('blog/')">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
+                                <p>{{ blog.summary }}</p>
+                                <p class="text-right"><a class="btn btn-twitter btn-sm" href="blog/{{ blog.id }} ">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
                                 <ul class="list-inline text-right">
-                                    <li v-for="tag in blog.tags"><a class="tag" href="#"><span class="label label-info">{% verbatim %}{{ tag.name }}{% endverbatim %}</span></a></li>
+                                    {% for tag in blog.tags.all %}
+                                    <li><a class="tag" href="#"><span class="label label-info">{{ tag.name }}</span></a></li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -35,20 +37,56 @@
                 <br/>
                 <div class="row">
                     <ul class="list-inline panel-footer">
-                        <li><a href="#"><i class="glyphicon glyphicon-time"></i>{% verbatim %} {{ blog.created_at | moment('YYYY-MM-DD') }} {% endverbatim %}</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span :id="blog.id | prefix('sourceId::')" class="cy_cmt_count"></span> )</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 阅读({% verbatim %} {{ blog.hits || 0 }} {% endverbatim %})</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-time"></i> {{ blog.created_at | date:"Y-m-d" }} </a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 评论( <span id="sourceId::{{ blog.id }}" class="cy_cmt_count"></span> )</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 阅读( {{ blog.hit_count_generic.first.hits | default:0 }} )</a></li>
                         <script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cysK87A3s"></script>
                     </ul>
                 </div>
             </div>
-            <pager :total-page="totalPage" @go-page="goPage"></pager>
+            {% endfor %}
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li>
+                        {% if blogs.has_previous %}
+                            <a href="?page={{ blogs.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        {% else %}
+                            <li class="disabled" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </li>
+                        {% endif %}
+                    </li>
+                    {% for page in pages %}
+                        {% if page == blogs.number %}
+                            <li class="active">
+                                <span>{{ page }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% elif page == '...' %}
+                            <li class="disabled">
+                                <span aria-hidden="true">{{ page }}</span>
+                            </li>
+                        {% else %}
+                            <li><a href="?page={{ page }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <li>
+                        {% if blogs.has_next %}
+                            <a href="?page={{ blogs.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        {% else %}
+                            <li class="disabled" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </li>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
-{% load render_bundle from webpack_loader %}
-{% render_bundle 'pager-commons' %}
-{% render_bundle 'blogs' %}
 {% endblock %}
 
 {% block afterbody %}
