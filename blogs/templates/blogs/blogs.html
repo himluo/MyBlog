@@ -45,45 +45,8 @@
                 </div>
             </div>
             {% endfor %}
-            <nav aria-label="Page navigation" class="text-center">
-                <ul class="pagination">
-                    <li>
-                        {% if blogs.has_previous %}
-                            <a href="?page={{ blogs.previous_page_number }}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        {% else %}
-                            <li class="disabled" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </li>
-                        {% endif %}
-                    </li>
-                    {% for page in pages %}
-                        {% if page == blogs.number %}
-                            <li class="active">
-                                <span>{{ page }} <span class="sr-only">(current)</span></span>
-                            </li>
-                        {% elif page == '...' %}
-                            <li class="disabled">
-                                <span aria-hidden="true">{{ page }}</span>
-                            </li>
-                        {% else %}
-                            <li><a href="?page={{ page }}">{{ page }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-                    <li>
-                        {% if blogs.has_next %}
-                            <a href="?page={{ blogs.next_page_number }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        {% else %}
-                            <li class="disabled" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </li>
-                        {% endif %}
-                    </li>
-                </ul>
-            </nav>
+            {% load tags %}
+            {% pager blogs %}
         </div>
     </div>
 </div>
