@@ -19,7 +19,7 @@ class Blog(models.Model, HitCountMixin):
     id = models.UUIDField(editable=False, default=uuid.uuid4, primary_key=True)
     user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='photo')
     summary = models.CharField(max_length=200)
     content = RichTextField()
     created_at = models.DateTimeField(default=timezone.now)

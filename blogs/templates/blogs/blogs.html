@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <p>{{ blog.summary }}</p>
-                                <p class="text-right"><a class="btn btn-twitter btn-sm" href="blog/{{ blog.id }} ">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
+                                <p class="text-right"><a class="btn btn-twitter btn-sm" href="{% url 'blog' blog.id %}">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
                                 <ul class="list-inline text-right">
                                     {% for tag in blog.tags.all %}
                                     <li><a class="tag" href="#"><span class="label label-info">{{ tag.name }}</span></a></li>

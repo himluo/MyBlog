@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def blogs(request):
     blogs_list = Blog.objects.all()
-    paginator = Paginator(blogs_list, 1)
+    paginator = Paginator(blogs_list, 5)
 
     page = request.GET.get('page')
     try:
