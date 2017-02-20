@@ -177,14 +177,14 @@ CKEDITOR_CONFIGS = {
                 'Blockquote'
             ]},
             {'name': 'links', 'items': ['Link', 'Unlink']},
-            {'name': 'insert', 'items': ['Image', 'EmbedSemantic', 'Table']},
+            {'name': 'insert', 'items': ['Image', 'EmbedSemantic', 'Table', 'CodeSnippet']},
             {'name': 'tools', 'items': ['Maximize']},
             {'name': 'editing', 'items': ['Scayt']},
         ],
 
         'toolbar': 'ArticleConfig',  # put selected toolbar config here
         'tabSpaces': 4,
-        'extraPlugins': 'autoembed,embedsemantic,image2,uploadimage,uploadfile',
+        'extraPlugins': 'autoembed,embedsemantic,image2,uploadimage,uploadfile,codesnippet',
         'removePlugins': 'image',
         'filebrowserUploadUrl': '/ckeditor/upload/',
         'filebrowserBrowseUrl': '/ckeditor/browse/',
