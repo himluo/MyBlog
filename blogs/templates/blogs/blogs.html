@@ -1,7 +1,7 @@
 {% extends "blogs/__base__.html" %}
 
 {% block meta %}<meta name="baidu-site-verification" content="XkA1JeQ1fO" />{% endblock %}
-{% block title %}My amazing blog{% endblock %}
+{% block title %}罗嘉轩个人博客{% endblock %}
 
 {% block beforehead %}
 
@@ -28,7 +28,7 @@
                                 <p class="text-right"><a class="btn btn-twitter btn-sm" href="{% url 'blog' blog.id %}">阅读全文 <i class="glyphicon glyphicon-chevron-right"></i></a></p>
                                 <ul class="list-inline text-right">
                                     {% for tag in blog.tags.all %}
-                                    <li><a class="tag" href="#"><span class="label label-info">{{ tag.name }}</span></a></li>
+                                    <li><a class="tag" href="{% url 'blogs_tag' tag.id%}"><span class="label label-default">{{ tag.name }}</span></a></li>
                                     {% endfor %}
                                 </ul>
                             </div>

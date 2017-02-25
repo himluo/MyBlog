@@ -37,7 +37,7 @@
             <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Category</a>
+                        <a href="{% url 'tags' %}">标签分类</a>
                     </li>
                     <li>
                         <a href="#">Category</a>
@@ -57,7 +57,7 @@
                                 <div class="input-group">
                                     <input id="bdcsMain" type="text" class="form-control" placeholder="Search for...">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Go!</button>
+                                        <input class="btn btn-default" type="submit" value="Go"></input>
                                     </span>
                                 </div>
                             </form>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
             </div>
-        </div><!-- /cont -->
+        </div><
     </div>
     <div class="container">
         {% block content %}<!-- block content -->{% endblock %}

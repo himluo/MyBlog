@@ -1,6 +1,6 @@
 {% extends "blogs/__base__.html" %}
 
-{% block title %}My amazing blog{% endblock %}
+{% block title %}{{ blog.name }}{% endblock %}
 
 {% block beforehead %}
 
@@ -24,7 +24,7 @@
                     <ul class="list-inline">
                         <li><span class="glyphicon glyphicon-tags"></span></li>
                         {% for tag in blog.tags.all %}
-                        <li><a class="tag" href="#"><span>{{ tag.name }}</span></a></li>
+                        <li><a class="tag" href="{% url 'blogs_tag' tag.id %}"><span>{{ tag.name }}</span></a></li>
                         {% endfor %}
                     </ul>
                 </div>

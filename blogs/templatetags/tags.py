@@ -26,3 +26,17 @@ def pager(page, page_view=2):
         'page_current': page,
         'pages_list': pages_list,
     }
+
+
+@register.simple_tag
+def arithmetic(operation_string, *args, **kwargs):
+    if not args:
+        val = eval(operation_string)
+    else:
+        val = eval(operation_string % args)
+
+    if 'change_int' in kwargs:
+        if kwargs['change_int']:
+            return int(val)
+
+    return val

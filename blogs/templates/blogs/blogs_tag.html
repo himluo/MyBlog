@@ -1,0 +1,32 @@
+{% extends "blogs/__base__.html" %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+
+{% block beforehead %}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div id = "vm" class="panel">
+            <div class="panel-heading">标签： {{ tag.name }}</div>
+            <ul class="list-group panel-body">
+                {% for blog in blogs %}
+                <li class="list-group-item">
+                    <a href="{% url 'blog' blog.id %}">
+                        {{ blog.name }}
+                    </a>
+                    <span class="badge">{{ blog.hit_count_generic.first.hits | default:0 }}</span>
+                </li>
+                {% endfor %}
+             </ul>
+            {% load tags %}
+            {% pager blogs %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block afterbody %}
+{% endblock %}

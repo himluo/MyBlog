@@ -1,0 +1,32 @@
+{% extends "blogs/__base__.html" %}
+
+{% block title %}{% endblock %}
+
+{% block beforehead %}
+{% load static %}
+{% load tags %}
+<script src="{% static 'blogs/js/addEventLoad.js' %}"></script>
+<script src="{% static 'blogs/js/tagCloud.js' %}"></script>
+<style>
+#tagsList {position:relative; width:600px; height:600px; margin: -50px auto;}
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#FF0000; letter-spacing:2px;}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div id = "vm" class="panel">
+            <div id="tagsList">
+                {% for tag in tags %}
+                    <span><a href="{% url 'blogs_tag' tag.id %}" style="color:rgb({% arithmetic '%f/%f*255' tag.blog_set.count blogs_num change_int=True %}, 0, {% arithmetic '(%f-%f)/%f*100' blogs_num tag.blog_set.count blogs_num change_int=True %})">{{ tag.name }}</a></span>
+                {% endfor %}
+		    </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block afterbody %}
+{% endblock %}
