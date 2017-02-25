@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tk@==0#uuu5g0$&r8^v=w@6%mlrw8b@4qtn%42-26z1n1^arxr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["www.himluo.com", "127.0.0.1", 'localhost']
 
